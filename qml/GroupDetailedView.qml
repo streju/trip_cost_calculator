@@ -9,7 +9,7 @@ Window {
     id: groupDetailedView
     width: screen.width
     height: screen.height
-    property string warning: warningIndicator.groupOperationsWarning
+    property string grOperationsWrn: warningIndicator.groupOperationsWarning
     ColumnLayout{
         width: parent.width
         height: parent.height
@@ -17,7 +17,7 @@ Window {
             id: groupInformation
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height*0.2
+            Layout.preferredHeight: parent.height*0.4
             color: "green"
             border.color: "white"
             border.width: 10
@@ -40,12 +40,13 @@ Window {
                     text: "Group: " + stateProvider.groupname
                     font.pixelSize: Font.Normal
                 }
-                RowLayout{
+                GridLayout{
                     Layout.topMargin: 10
+                    columns: 2
+                    rows: 2
                     Button{
                         id: addNewBillButton
                         text: qsTr("Add new bill")
-                        Layout.preferredWidth: screen.width/10
                         Layout.fillWidth: true
                         onClicked: {
                             backendController.updateCurrencyRates()
@@ -55,7 +56,6 @@ Window {
                     Button{
                         id: addNewGroupUserButton
                         text: qsTr("Add user")
-                        Layout.preferredWidth: screen.width/10
                         Layout.fillWidth: true
                         onClicked: addNewUserToGroupDialog.open()
                     }
@@ -68,7 +68,6 @@ Window {
                     Button{
                         id: deleteGroupButton
                         text: qsTr("Delete group")
-                        Layout.preferredWidth: screen.width/10
                         Layout.fillWidth: true
                         onClicked: deleteGroupDialog.open()
                     }
@@ -93,13 +92,16 @@ Window {
                         delegate: Rectangle{
                             radius: 15
                             anchors.horizontalCenter: parent.horizontalCenter
-                            width: screen.width/3
+                            width: screen.width * 3/4
                             height: 100
                             color: "grey"
                             Text {
                                 id: userName
                                 anchors{left: parent.left; verticalCenter: parent.verticalCenter}
                                 text: model.related_user
+                                font.pointSize: 20
+                                minimumPointSize: 5
+                                fontSizeMode: Text.Fit
                                 leftPadding: 20
                                 Component.onCompleted:{
                                     console.log("userName " + userName.text)
@@ -110,6 +112,9 @@ Window {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 anchors.verticalCenter: parent.verticalCenter
                                 color: model.value >= 0 ? "black" : "red"
+                                font.pointSize: 20
+                                minimumPointSize: 5
+                                fontSizeMode: Text.Fit
                                 text: qsTr("Current balance: " + model.value)
                             }
                             Button{
@@ -140,6 +145,9 @@ Window {
                                     id: activity
                                     text: model.description
                                     anchors.verticalCenter: parent.verticalCenter
+                                    font.pointSize: Font.Normal
+                                    minimumPointSize:5
+                                    fontSizeMode: Text.Fit
                                 }
                             }
                         }
@@ -153,8 +161,6 @@ Window {
         id: addGroupActivityDialog
         title: qsTr("New " + stateProvider.groupname + " bill")
         standardButtons: StandardButton.Save | StandardButton.Cancel
-        height: groupDetailedView.height/2
-        width: groupDetailedView.width/2
         ColumnLayout{
             anchors.fill: parent
             TextField{
@@ -250,8 +256,6 @@ Window {
         id: addNewUserToGroupDialog
         title: qsTr("Add new user to " + controller.groupname)
         standardButtons: StandardButton.Ok | StandardButton.Cancel
-        height: groupDetailedView.height/4
-        width: groupDetailedView.width/4
         TextField{
             id: assingUserToGroupButton
             width: parent.width
@@ -263,7 +267,7 @@ Window {
             if (clickedButton === StandardButton.Ok) {
                 modelUserToBill.clear()
                 backendController.addUserToGroup(assingUserToGroupButton.text)
-                if (warning) {showMsg(warning)}
+                if (grOperationsWrn) {showMsg(grOperationsWrn)}
                 else {
                     showMsg("Succesfully added user: " + assingUserToGroupButton.text + " to group " + controller.groupname)
                 }
@@ -275,8 +279,6 @@ Window {
         id: removeUserFromGroupDialog
         title: qsTr("Remove user")
         standardButtons: StandardButton.Apply | StandardButton.Cancel
-        height: groupDetailedView.height/4
-        width: groupDetailedView.width/4
         ComboBox{
             id: removeUserBox
             width: parent.width
@@ -349,7 +351,7 @@ Window {
         onButtonClicked: {
             if (clickedButton === StandardButton.Yes) {
                 backendController.deleteGroup()
-                if (warning) {showMsg(warning)}
+                if (grOperationsWrn) {showMsg(grOperationsWrn)}
                 else {
                     showMsg("Succesfully deleted group: " + controller.groupname)
                     controller.displayGroupDetailView(false, "")

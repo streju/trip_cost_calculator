@@ -19,7 +19,7 @@ Page {
             bottomMargin: 10
             delegate: Rectangle{
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: screen.width *3/4
+                width: screen.width
                 radius: 25
                 height: 100
                 gradient: Gradient{
@@ -31,8 +31,10 @@ Page {
                         horizontalCenter: parent.horizontalCenter
                         verticalCenter: parent.verticalCenter
                     }
-                    font.pixelSize: 20
                     text: "Data: " + model.data + " Description: " + model.description
+                    font.pointSize: 10
+                    minimumPointSize:5
+                    fontSizeMode: Text.Fit
                 }
             }
         }

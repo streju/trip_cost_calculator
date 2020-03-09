@@ -35,26 +35,24 @@ Page {
                         GradientStop { position: 1.0; color: "green" }
                     }
                     border.color: "white"
-                    Text {
-                        id: friendText
-                        anchors{
-                            horizontalCenter: parent.horizontalCenter
-                            verticalCenter: parent.verticalCenter
+                    ColumnLayout{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        Text {
+                            id: friendText
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            color: "black"
+                            text: model.related_user
+                            font.pixelSize: 20
                         }
-                        color: "black"
-                        text: model.related_user
-                        font.pixelSize: 20
-                    }
-                    Text {
-                        property double balance: friendsModel.getBalanceWithFriend(model.related_user)
-                        anchors{
-                            right: parent.right
-                            verticalCenter: parent.verticalCenter
+                        Text {
+                            property double balance: friendsModel.getBalanceWithFriend(model.related_user)
+                            Layout.alignment: Qt.AlignHCenter
+                            font.pixelSize: 20
+                            text: "BALANCE: " + balance
+                            color: balance >= 0 ? "black" : "red"
+                            rightPadding: 10
                         }
-                        font.pixelSize: 20
-                        text: "BALANCE: " + balance
-                        color: balance >= 0 ? "black" : "red"
-                        rightPadding: 10
                     }
                 }
                 RoundButton{
@@ -71,9 +69,7 @@ Page {
     Dialog {
         id: addFriendDialog
         title: "Add friend"
-        standardButtons: StandardButton.Ok | StandardButton.Cancel
-        height: friendsPage.height/4
-        width: friendsPage.width/4
+        standardButtons: Dialog.Ok | Dialog.Cancel
         TextField {
             id: friendNameInput
             property bool loginExist: true

@@ -78,8 +78,13 @@ bool Controller::validateEnteredPassword(const QString &enteredUsername, const Q
 
 bool Controller::logInUser(const QString& username, const QString &password)
 {
-    return validateEnteredUsername(username, WarningType::VALIDATION) &&
-        validateEnteredPassword(username, password);
+    if(validateEnteredUsername(username, WarningType::VALIDATION) &&
+        validateEnteredPassword(username, password))
+    {
+        warningIndicator_->setWarning("", WarningType::VALIDATION);
+        return true;
+    }
+    return false;
 }
 
 void Controller::addNewUser(const QString &username, const QString &password)

@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import Warnings 1.0
-import QtGraphicalEffects 1.1
+import QtGraphicalEffects 1.0
 import QtQuick.Dialogs 1.2
 
 ApplicationWindow {
@@ -25,10 +25,12 @@ ApplicationWindow {
             anchors.top: programLogo.top
             anchors.topMargin: 20
             text: qsTr("Trip cost calculator")
-            font.pixelSize: Font.Normal
             font.bold: true
             font.italic: true
             font.family: "Helvetica"
+            font.pointSize: Font.Normal
+            minimumPointSize:20
+            fontSizeMode: Text.Fit
             visible: false
         }
         LinearGradient{
@@ -104,7 +106,7 @@ ApplicationWindow {
             Button {
                 id: loginButton
                 text: qsTr("Login")
-                width: applicationWindow.width / 2
+                Layout.preferredWidth: applicationWindow.width / 2
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 display: AbstractButton.TextBesideIcon
                 flat: false
@@ -119,8 +121,9 @@ ApplicationWindow {
                 onClicked: {
                     if (backendController.logInUser(user.text, passwordTxt.text))
                     {
-                        controller.displayMainAppWindow(true, user.text)
+                        var login = user.text
                         clearInputs()
+                        controller.displayMainAppWindow(true, login)
                         return;
                     }
                     console.log("Warning: " + warning)
@@ -132,7 +135,7 @@ ApplicationWindow {
             Button {
                 id: registrationButton
                 text: qsTr("Register new user")
-                width: applicationWindow.width / 2
+                Layout.preferredWidth: applicationWindow.width / 2
                 font.weight: Font.Light
                 display: AbstractButton.TextBesideIcon
                 flat: false
@@ -155,8 +158,7 @@ ApplicationWindow {
                     color: "orange"
                     text: exitButton.text
                 }
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
+                Layout.alignment: Qt.AlignRight | Qt.AlignBottom
                 background: Rectangle{
                     radius: 15
                     anchors.fill: parent

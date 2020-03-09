@@ -28,11 +28,13 @@ ApplicationWindow {
                     text: qsTr("<")
                     color: "black"
                 }
-                onClicked: displayMainAppWindow(false, "")
+                onClicked: controller.displayMainAppWindow(false, "")
             }
             Label {
                 text: qsTr("User: " + controller.username + "     Total balance: " + groupModel.userTotalBalance) + " PLN"
-                font.pixelSize: Qt.application.font.pixelSize * 2
+                font.pointSize: Qt.application.font.pixelSize * 2
+                minimumPointSize:5
+                fontSizeMode: Text.Fit
                 padding: 10
                 color: "black"
                 elide: Label.ElideRight
