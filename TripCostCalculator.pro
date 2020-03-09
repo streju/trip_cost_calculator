@@ -13,22 +13,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        models/ActivitiesModel.cpp \
-        Controller.cpp \
-        CurrencyService.cpp \
-        models/FriendsModel.cpp \
-        models/GroupDetails.cpp \
-        models/GroupModel.cpp \
-        NetworkHelper.cpp \
-        RegistrationService.cpp \
-        SqlConnectionHelper.cpp \
-        UserValidation.cpp \
-        WarningIndicator.cpp \
-        main.cpp
+INCLUDEPATH += src
 
-RESOURCES += qml.qrc \
-    media.qrc
+SOURCES += \
+        src/models/ActivitiesModel.cpp \
+        src/Controller.cpp \
+        src/CurrencyService.cpp \
+        src/models/FriendsModel.cpp \
+        src/models/GroupDetails.cpp \
+        src/models/GroupModel.cpp \
+        src/NetworkHelper.cpp \
+        src/RegistrationService.cpp \
+        src/SqlConnectionHelper.cpp \
+        src/UserValidation.cpp \
+        src/WarningIndicator.cpp \
+        src/main.cpp
+
+RESOURCES += src/qml.qrc \
+    src/media.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -42,21 +44,24 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    models/ActivitiesModel.hpp \
-    AppProperties.hpp \
-    models/BaseQSqlQueryModel.hpp \
-    Controller.hpp \
-    Currency.hpp \
-    CurrencyService.hpp \
-    CurrentStateProvider.hpp \
-    models/FriendsModel.hpp \
-    models/GroupDetails.hpp \
-    models/GroupModel.hpp \
-    NetworkHelper.hpp \
-    RegistrationService.hpp \
-    UserValidation.hpp \
-    ValidationBase.hpp \
-    WarningIndicator.hpp
+    src/models/ActivitiesModel.hpp \
+    src/AppProperties.hpp \
+    src/models/BaseQSqlQueryModel.hpp \
+    src/Controller.hpp \
+    src/Currency.hpp \
+    src/CurrencyService.hpp \
+    src/CurrentStateProvider.hpp \
+    src/models/FriendsModel.hpp \
+    src/models/GroupDetails.hpp \
+    src/models/GroupModel.hpp \
+    src/NetworkHelper.hpp \
+    src/RegistrationService.hpp \
+    src/UserValidation.hpp \
+    src/ValidationBase.hpp \
+    src/WarningIndicator.hpp \
+    src/QSqlQueryCreator.hpp \
+    src/QSqlQueryWrapper.hpp \
+    src/Interfaces/IWarningIndicator.hpp
 
 DISTFILES +=
 
