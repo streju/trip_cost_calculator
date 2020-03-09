@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/FriendsPage.qml</file>
+        <file>qml/GroupsPage.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>qml/mainAppWindow.qml</file>
+        <file>qml/registration.qml</file>
+        <file>qml/LastActivityPage.qml</file>
+        <file>qml/NewGroupCreation.qml</file>
+        <file>qml/GroupDetailedView.qml</file>
+        <file>qml/Controller.qml</file>
+    </qresource>
+</RCC>

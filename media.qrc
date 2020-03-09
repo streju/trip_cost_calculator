@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/media">
+        <file>media/icons/person_add-24px.svg</file>
+        <file>media/img/main_img.jpg</file>
+        <file>media/icons/group-24px.svg</file>
+        <file>media/icons/add-24px.svg</file>
+        <file>media/icons/receipt-24px.svg</file>
+        <file>media/img/usa_flag.png</file>
+        <file>media/img/uk_flag.png</file>
+        <file>media/img/eu_flag.png</file>
+        <file>media/img/pl_flag.png</file>
+    </qresource>
+</RCC>
